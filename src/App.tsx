@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import DataStreamer, { ServerRespond } from './DataStreamer';
+import React, {Component} from 'react';
+import DataStreamer, {ServerRespond} from './DataStreamer';
 import Graph from './Graph';
 import './App.css';
+import {setInterval} from "timers";
 
 /**
  * State declaration for <App />
  */
+// make showGraph of boolean type - conditional
 interface IState {
-  data: ServerRespond[],
-  // make showGraph of boolean type - conditional
-  showGraph: boolean,
+    data: ServerRespond[],
+    showGraph: boolean
 }
 
 /**
@@ -17,8 +18,8 @@ interface IState {
  * It renders title, button and Graph react element.
  */
 class App extends Component<{}, IState> {
-  constructor(props: {}) {
-    super(props);
+    constructor(props: {}) {
+        super(props);
 
     this.state = {
       // data saves the server responds.
@@ -45,17 +46,17 @@ class App extends Component<{}, IState> {
     let x = 0;
     const interval = setInterval(() => {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
-        this.setState({
-          data: serverResponds,
-          showGraph : true,
-        });
-      });
-      x++;
-      if (x > 1000) {
-        clearInterval(interval);
-      }
-    }, 100);
-  }
+                this.setState({
+                    data: serverResponds,
+                    showGraph : true,
+                 });
+            });
+            x++;
+            if (x > 1000) {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
 
   /**
    * Render the App react component
