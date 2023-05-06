@@ -252,7 +252,6 @@ ops = {
     'sell': operator.ge,
 }
 
-
 class App(object):
     """ The trading game server application. """
 
